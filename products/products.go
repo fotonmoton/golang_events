@@ -2,6 +2,7 @@ package products
 
 import (
 	"events/observer"
+	"slices"
 )
 
 type Warehouse struct {
@@ -24,12 +25,12 @@ func (w *Warehouse) Register(listener observer.Observer) {
 
 // Not sure it works
 func (w *Warehouse) Deregister(listener observer.Observer) {
-	// idx := slices.IndexFunc(w.subscribers, func(o observer.Observer) bool { return o == listener })
-	// w.subscribers = slices.Delete(w.subscribers, idx, idx)
+	idx := slices.IndexFunc(w.subscribers, func(o observer.Observer) bool { return o == listener })
+	w.subscribers = slices.Delete(w.subscribers, idx, idx)
 }
 
 func (w *Warehouse) Notify(subject any) {
 	for _, listener := range w.subscribers {
-		listener(subject)
+		listener.Observe(subject)
 	}
 }

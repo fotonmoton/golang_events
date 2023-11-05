@@ -16,9 +16,9 @@ func ObjectObserverExample() {
 
 	warehouse := products.NewWareHouse()
 
-	warehouse.Register(greg.Observe)
-	warehouse.Register(bob.Observe)
-	warehouse.Register(func(subject any) { newArrivals.AddNewProduct(subject.(string)) })
+	warehouse.Register(greg)
+	warehouse.Register(bob)
+	warehouse.Register(newArrivals)
 
 	newArrivals.Show()
 
@@ -85,6 +85,6 @@ func PubSubExample() {
 }
 
 func main() {
-	// ObjectObserverExample()
+	ObjectObserverExample()
 	PubSubExample()
 }
